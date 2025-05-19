@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  db:
+    image: ankane/pgvector
+    container_name: pgvector-db
+    environment:
+      POSTGRES_USER: faceuser
+      POSTGRES_PASSWORD: facepass
+      POSTGRES_DB: facedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: face-api
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://faceuser:facepass@db:5432/facedb
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/code
+
+volumes:
+  pgdata:

@@ -13,8 +13,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dlib and face_recognition
-RUN pip install dlib face_recognition
-RUN pip install fastapi uvicorn python-multipart pillow
+RUN pip install dlib
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 # Set workdir and copy code
 WORKDIR /app
