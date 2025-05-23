@@ -1,7 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
-from db.db import SessionLocal, FaceEncoding
-from utils.image_utils import encode_face, add_to_index, search_face
+from app.db.db import SessionLocal, FaceEncoding
+from app.utils.image_utils import encode_face, add_to_index, search_face
 import numpy as np
 from sqlalchemy.orm import Session
 import shutil

@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: faceuser
       POSTGRES_PASSWORD: facepass
       POSTGRES_DB: facedb
+    env_file:
+      - ./.env
     ports:
       - "5432:5432"
     volumes:
@@ -20,6 +22,8 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://faceuser:facepass@db:5432/facedb
+    env_file:
+      - ./.env
     ports:
       - "8000:8000"
     volumes:
