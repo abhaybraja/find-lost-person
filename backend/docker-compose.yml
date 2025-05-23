@@ -20,8 +20,6 @@ services:
     container_name: face-api
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgres://faceuser:facepass@db:5432/facedb
     env_file:
       - ./.env
     ports:
