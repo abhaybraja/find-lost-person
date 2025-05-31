@@ -15,3 +15,6 @@ class FaceEncoding(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     encoding = Column(ARRAY(float))  # 128-d face vector
+    address = Column(String, nullable=True)
+    city = Column(String, nullable=True)
+    state = Column(String, nullable=True)
