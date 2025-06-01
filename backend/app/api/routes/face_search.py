@@ -35,3 +35,22 @@ def search(file: UploadFile = File(...)):
 
     match = search_face(encoding)
     return {"match": match}
+
+@router.post("/search-name/")
+def search(name: str):
+    session: Session = SessionLocal()
+    records = session.query(FaceEncoding).filter(FaceEncoding.name==name).all()
+    if not records:
+        raise HTTPException(status_code=404, detail="No records found with this name")
+    
+    return {"results": [
+        {
+            "id": r.id,
+            "name": r.name,
+            "mobile": r.mobile,
+            "address": r.address,
+            "city": r.city,
+            "state": r.state,
+            "filename": r.filename
+        } for r in records
+    ]}
