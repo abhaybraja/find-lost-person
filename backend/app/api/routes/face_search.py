@@ -8,7 +8,7 @@ import shutil
 
 router = APIRouter()
 @router.post("/upload/")
-def upload_face(name: str, file: UploadFile = File(...)):
+def upload_face(name: str, city:str, address:str, file: UploadFile = File(...)):
     session: Session = SessionLocal()
     with open(f"temp.jpg", "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
@@ -17,7 +17,7 @@ def upload_face(name: str, file: UploadFile = File(...)):
     if encoding is None:
         return {"error": "No face found"}
 
-    face = FaceEncoding(name=name, encoding=encoding.tolist())
+    face = FaceEncoding(name=name, encoding=encoding.tolist(), address=address, city=city)
     session.add(face)
     session.commit()
     add_to_index(encoding, name)
